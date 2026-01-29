@@ -1,0 +1,27 @@
+﻿<!-- SafeVault.Web/Views/Home/Index.cshtml -->
+@{
+    ViewData["Title"] = "SafeVault Home";
+}
+
+<section>
+    <h1>Welcome to SafeVault</h1>
+    <p>Manage sensitive data securely. Choose an action:</p>
+
+    <nav>
+        <ul>
+            <li><a asp-controller="Auth" asp-action="Register">Register</a></li>
+            <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
+            <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <hr />
+
+    <h2>API quick test</h2>
+    <p>After logging in and obtaining a JWT, use it to call your data:</p>
+    <ul>
+        <li><code>GET /api/users/submit</code> (User/Admin)</li>
+        <li><code>GET /api/users/admin/List</code> (Admin)</li>
+    </ul>
+</section>
+

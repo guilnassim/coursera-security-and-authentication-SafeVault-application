@@ -1,0 +1,10 @@
+﻿
+<nav>
+    <a asp-controller="Home" asp-action="Index">Home</a> |
+    <a asp-controller="Auth" asp-action="Register">Register</a> |
+    <a asp-controller="Auth" asp-action="Login">Login</a> |
+    <form asp-controller="Auth" asp-action="Logout" method="post" style="display:inline;">
+        @Html.AntiForgeryToken()
+        <button type="submit">Logout</button>
+    </form>
+</nav>

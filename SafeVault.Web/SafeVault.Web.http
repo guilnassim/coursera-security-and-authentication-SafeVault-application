@@ -1,0 +1,59 @@
+﻿@SafeVault.Web_HostAddress = https://localhost:7237
+
+###
+
+POST {{SafeVault.Web_HostAddress}}/account/register
+Content-Type: application/json
+
+{
+  "Username" : "AdminUser", "Email"  : "admin@web.com", "Password" : "123fdDF%44323*&", "Role" : "Admin"
+}
+
+### Login
+#@name login
+POST {{SafeVault.Web_HostAddress}}/account/login
+Content-Type: application/json
+
+{
+   "Username" : "AdminUser", "Password" : "123fdDF%44323*&"
+}
+
+###
+
+@token = {{login.response.body.$.token}}
+
+GET {{SafeVault.Web_HostAddress}}/api/users/admin/list
+Authorization: Bearer {{token}}
+
+###
+
+POST {{SafeVault.Web_HostAddress}}/api/users/submit
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "Username" : "userTest", "Email" : "oisadjf@asoidj.com" , "UserPrivateDetail" : "Private Data only for admin."
+}
+
+###
+
+GET {{SafeVault.Web_HostAddress}}/api/users/main
+
+
+
+###
+
+@username = userTest
+
+GET {{SafeVault.Web_HostAddress}}/api/users/admin/user?username={{username}}
+Authorization: Bearer {{token}}
+
+###
+
+GET {{SafeVault.Web_HostAddress}}/account/register
+
+###
+
+GET {{SafeVault.Web_HostAddress}}/account/login
+
+###

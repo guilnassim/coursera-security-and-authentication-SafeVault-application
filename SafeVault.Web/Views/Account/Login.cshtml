@@ -1,0 +1,36 @@
+﻿<!-- src/Presentation/SafeVault.Web/wwwroot/forms/login.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SafeVault Login</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'">
+</head>
+<body>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input id="username" name="username" type="text" pattern="[A-Za-z0-9._-]{3,50}" required>
+
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password" minlength="12" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const res = await fetch('/api/account/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              username: document.getElementById('username').value,
+              password: document.getElementById('password').value
+            })
+          });
+          const data = await res.json();
+          if (data.token) localStorage.setItem('jwt', data.token);
+          alert(res.ok ? 'Logged in' : 'Login failed');
+        });
+    </script>
+</body>
+</html>
